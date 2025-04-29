@@ -1,7 +1,7 @@
-Digital Music Store
+#Digital Music Store
 A database project designed to manage a digital music store's operations, including customers, administrators, and music inventory.​
 
-📁 Project Structure
+#📁 Project Structure
 Digital_music_store.sql: SQL script containing the database schema and sample data.
 
 ERR diagram.png: Entity-Relationship diagram illustrating the database structure.​
