@@ -1,50 +1,130 @@
-#Digital Music Store
-A database project designed to manage a digital music store's operations, including customers, administrators, and music inventory.​
+# 🎧 Music Store Database Schema
 
-#📁 Project Structure
-Digital_music_store.sql: SQL script containing the database schema and sample data.
+This repository contains the Entity-Relationship Diagram (ERD) for a **Music Store Management System**. It models the relationships between customers, songs, playlists, artists, albums, payments, subscriptions, and more.
 
-ERR diagram.png: Entity-Relationship diagram illustrating the database structure.​
+## 📊 ER Diagram
 
-🛠️ Features
-Customer Management: Store and manage customer information.
+![Music Store ER Diagram](./ERR%20daigram.png)
 
-Administrator Management: Handle administrator details and permissions.
+---
 
-Music Inventory: Maintain records of available music tracks, albums, and artists.​
+## 🗂️ Entity Descriptions
 
-🧰 Technologies Used
-Database: MySQL
+### **1. Customer**
+Represents users of the platform.
+- `customer_id` (PK)
+- `name`
+- `email`
+- `registration_date`
 
-Tools: SQL scripts for database creation and management​
+### **2. Subscription**
+Tracks subscription plans of customers.
+- `subscription_id` (PK)
+- `customer_id` (FK)
+- `plan`
+- `start_date`
+- `end_date`
+- `is_active` (boolean)
 
-🚀 Getting Started
-Clone the Repository:
+### **3. Purchase**
+Records purchases made by customers.
+- `purchase_id` (PK)
+- `customer_id` (FK)
+- `purchase_date`
+- `total_amount`
 
-bash
-Copy
-Edit
-git clone https://github.com/Shalushalzz/digital_music_store.git
-Set Up the Database:
+### **4. Payment**
+Logs payment details for each purchase.
+- `payment_id` (PK)
+- `purchase_id` (FK)
+- `method` (e.g., card, PayPal)
+- `status` (e.g., completed, pending)
+- `payment_date`
 
-Open your MySQL client.
+### **5. PurchasedDetail**
+Links songs to purchases (many-to-many relationship).
+- `purchase_id` (FK)
+- `song_id` (FK)
 
-Execute the Digital_music_store.sql script to create the database and populate it with sample data.​
+### **6. Song**
+Contains individual song data.
+- `song_id` (PK)
+- `title`
+- `duration`
+- `price`
+- `album_id` (FK)
+- `genre_id` (FK)
 
-Review the ER Diagram:
+### **7. Album**
+Albums grouping multiple songs.
+- `album_id` (PK)
+- `title`
+- `release_year`
+- `artist_id` (FK)
 
-Refer to ERR diagram.png for a visual representation of the database schema.​
+### **8. Artist**
+Musicians who produce albums and songs.
+- `artist_id` (PK)
+- `name`
 
-📌 Usage
-Use the provided SQL script to set up the database.
+### **9. Genre**
+Categorizes songs by genre.
+- `genre_id` (PK)
+- `name`
 
-Integrate the database with your application to manage music store operations.​
+### **10. Review**
+Customer reviews for songs.
+- `review_id` (PK)
+- `customer_id` (FK)
+- `song_id` (FK)
+- `rating` (numeric)
+- `comment`
+- `review_date`
 
-📄 License
-This project is open-source and available under the MIT License.​
+### **11. Playlist**
+Customer-created song collections.
+- `playlist_id` (PK)
+- `name`
+- `customer_id` (FK)
+- `created_at`
 
-🤝 Contributing
-Contributions are welcome! Please fork the repository and submit a pull request for any enhancements or bug fixes.​
+### **12. PlaylistSong**
+Associates songs to playlists (many-to-many).
+- `playlist_id` (FK)
+- `song_id` (FK)
 
-📬 Contact
-For any questions or suggestions, please open an issue in the repository.​
+---
+
+## 🔁 Relationships
+
+- **One-to-Many**: A customer can have many subscriptions, purchases, playlists, and reviews.
+- **Many-to-Many**: 
+  - Songs can belong to multiple playlists and purchases.
+  - Playlists can contain multiple songs.
+- **One-to-One**: Each payment is tied to one purchase.
+- **Belongs-To**: 
+  - Songs belong to albums and genres.
+  - Albums are created by artists.
+
+---
+
+## 🛠️ Use Cases
+
+- Building a backend for a music streaming or purchase platform.
+- Designing relational queries for data analysis.
+- Learning relational database design with complex relationships.
+
+---
+
+## 📁 Files
+
+- `ERR daigram.png` – Visual representation of the ER model.
+- (Optional) SQL schema or seed data files can be added later.
+
+---
+
+## 🧠 Contributing
+
+Feel free to contribute enhancements, improvements, or SQL implementations based on this schema.
+
+
